@@ -1,14 +1,18 @@
 {
   "name": "electron",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "electron:build": "tsc src/electron-main.ts --outDir dist",
+    "build": "ng build && npm run electron:build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "electron:start": "npm run build && electron dist/electron-main.js",
+    "electron:dev": "npm run build --watch && electron dist/electron-main.js --serve"
+    
   },
   "private": true,
   "dependencies": {
@@ -27,17 +31,22 @@
   "devDependencies": {
     "@angular/cli": "1.0.6",
     "@angular/compiler-cli": "^4.0.0",
+    "@types/electron": "^1.4.38",
     "@types/jasmine": "2.5.38",
     "@types/node": "~6.0.60",
     "codelyzer": "~2.0.0",
+    "copyfiles": "^1.2.0",
+    "electron": "^1.6.10",
+    "electron-packager": "^8.7.0",
+    "electron-reload": "^1.2.0",
     "jasmine-core": "~2.5.2",
     "jasmine-spec-reporter": "~3.2.0",
     "karma": "~1.4.1",
     "karma-chrome-launcher": "~2.1.1",
     "karma-cli": "~1.0.1",
+    "karma-coverage-istanbul-reporter": "^0.2.0",
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
-    "karma-coverage-istanbul-reporter": "^0.2.0",
     "protractor": "~5.1.0",
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",
